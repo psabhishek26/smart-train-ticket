@@ -1,0 +1,139 @@
+.adminContainer {
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  color: #f5f5f5;
+}
+
+.header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.error {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tablesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.tableSection {
+  flex: 1 1 45%;
+  background-color: #1d1d1d;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.tableSection h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #03dac5;
+  border-bottom: 2px solid #03dac5;
+  display: inline-block;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #444;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table td {
+  background-color: #2c2c2c;
+}
+
+.table tr:hover {
+  background-color: #555;
+}
+
+.available {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.unavailable {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.placeholder {
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.resetButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.resetButton:hover {
+  background-color: #0056b3;
+}
+
+.resetButton {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.resetButton:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.resetButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.resetting {
+  opacity: 0.7;
+}
+
+.success {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.noData {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
