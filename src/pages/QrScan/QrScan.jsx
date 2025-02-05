@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ref, get, set } from "firebase/database";
+import { ref, get, set, remove } from "firebase/database";
 import { db } from "../../firebase";
 import styles from "./QrScan.module.css";
 import { Html5Qrcode } from "html5-qrcode";
@@ -102,7 +102,7 @@ const QrScan = () => {
 
   const handleReset = async () => {
     try {
-      const currentTicketRef = ref("current_ticket");
+      const currentTicketRef = ref(db, "current_ticket");
       await remove(currentTicketRef);
 
       setUserData(null);
@@ -112,7 +112,7 @@ const QrScan = () => {
       }
       startScanner();
     } catch (error) {
-      console.error("Error resetting current ticket");
+      console.error("Error resetting current ticket", error);
     }
   };
 
