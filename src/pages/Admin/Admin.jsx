@@ -77,9 +77,6 @@ const Admin = () => {
         const currentTicketRef = ref(db, "current_ticket");
         await remove(currentTicketRef);
 
-        await fetchTickets();
-        await fetchSeats();
-
         setResetSuccess(true);
         setTimeout(() => setResetSuccess(false), 3000);
       } catch (err) {
@@ -162,16 +159,16 @@ const Admin = () => {
             <p className={styles.noData}>No seats data found.</p>
           )}
         </div>
-        <button
-          className={`${styles.resetButton} ${
-            isResetting ? styles.resetting : ""
-          }`}
-          onClick={handleReset}
-          disabled={isResetting}
-        >
-          {isResetting ? "Resetting..." : "Reset All Tickets & Seats"}
-        </button>
       </div>
+      <button
+        className={`${styles.resetButton} ${
+          isResetting ? styles.resetting : ""
+        }`}
+        onClick={handleReset}
+        disabled={isResetting}
+      >
+        {isResetting ? "Resetting..." : "Reset All Tickets & Seats"}
+      </button>
     </div>
   );
 };
