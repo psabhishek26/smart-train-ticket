@@ -162,16 +162,16 @@ const Admin = () => {
             <p className={styles.noData}>No seats data found.</p>
           )}
         </div>
-        <button
-          className={`${styles.resetButton} ${
-            isResetting ? styles.resetting : ""
-          }`}
-          onClick={handleReset}
-          disabled={isResetting}
-        >
-          {isResetting ? "Resetting..." : "Reset All Tickets & Seats"}
-        </button>
       </div>
+      <button
+        className={`${styles.resetButton} ${
+          isResetting ? styles.resetting : ""
+        }`}
+        onClick={handleReset}
+        disabled={isResetting}
+      >
+        {isResetting ? "Resetting..." : "Reset All Tickets & Seats"}
+      </button>
     </div>
   );
 };
