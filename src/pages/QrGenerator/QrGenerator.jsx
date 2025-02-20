@@ -7,7 +7,8 @@ import { db } from "../../firebase";
 const QrGenerator = () => {
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    destination: "",
+    date: "",
     seatId: "",
   });
   const [seats, setSeats] = useState({});
@@ -50,10 +51,19 @@ const QrGenerator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, phone, seatId } = formData;
+    const { name, destination, date, seatId } = formData;
 
-    if (!name || !phone || !seatId) {
+    if (!name || !destination || !date || !seatId) {
       setError("Please fill in all fields and select a seat.");
+      return;
+    }
+
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < currentDate) {
+      setError("Please select a date that is not in the past.");
       return;
     }
 
@@ -71,7 +81,8 @@ const QrGenerator = () => {
       
       const ticketData = {
         name,
-        phone,
+        destination,
+        date,
         seatId,
         createdAt: Date.now()
       };
@@ -126,14 +137,26 @@ const QrGenerator = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="phone">Phone Number:</label>
+            <label htmlFor="destination">Destination:</label>
             <input
               type="text"
-              id="phone"
-              name="phone"
-              value={formData.phone}
+              id="destination"
+              name="destination"
+              value={formData.destination}
               onChange={handleChange}
-              placeholder="Enter phone number"
+              placeholder="Enter destination"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="destination">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              placeholder="Enter date"
             />
           </div>
 
