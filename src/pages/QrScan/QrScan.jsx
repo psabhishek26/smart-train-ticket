@@ -158,10 +158,10 @@ const QrScan = () => {
                   <strong>Name:</strong> {userData.name}
                 </p>
                 <p>
-                  <strong>Phone:</strong> {userData.phone}
+                  <strong>Destination:</strong> {userData.destinationFrom} - {userData.destinationTo}
                 </p>
                 <p>
-                  <strong>Seat ID:</strong> {userData.seatId}
+                  <strong>Seat Number:</strong> {userData.seatId}
                 </p>
               </div>
               <button className={styles.resetButton} onClick={handleReset}>
