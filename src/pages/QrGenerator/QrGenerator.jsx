@@ -16,6 +16,7 @@ const QrGenerator = () => {
   const [qrValue, setQrValue] = useState("");
   const [error, setError] = useState("");
   const [ticketDetails, setTicketDetails] = useState(null);
+  const [selectedCoach, setSelectedCoach] = useState(null);
 
   const qrCodeRef = useRef();
 
@@ -46,6 +47,33 @@ const QrGenerator = () => {
 
   const handleSeatSelection = (seatId) => {
     setFormData({ ...formData, seatId });
+  };
+
+  const handleCoachSelection = (coach) => {
+    setSelectedCoach(coach);
+    setFormData({ ...formData, seatId: "" });
+  };
+
+  const getCoachSeats = (coach) => {
+    switch(coach) {
+      case 'A':
+        return ['A1', 'A2'].map(seatId => ({
+          id: seatId,
+          available: seats[seatId] !== undefined ? seats[seatId] : true
+        }));
+      case 'B':
+        return ['B1','B2'].map(seatId => ({
+          id: seatId,
+          available: seats[seatId] !== undefined ? seats[seatId] : true
+        }));
+      case 'C':
+        return ['C1', 'C2', 'C3', 'C4'].map(seatId => ({
+          id: seatId,
+          available: false,
+        }));
+      default:
+        return [];
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -161,23 +189,41 @@ const QrGenerator = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label>Select a Seat:</label>
-            <div className={styles.seatSelection}>
-              {Object.keys(seats).map((seatId) => (
+            <label>Select a Coach:</label>
+            <div className={styles.coachSelection}>
+              {['A', 'B', 'C'].map((coach) => (
                 <button
-                  key={seatId}
+                  key={coach}
                   type="button"
-                  className={`${styles.seatButton} ${
-                    seats[seatId] ? styles.available : styles.unavailable
-                  } ${formData.seatId === seatId ? styles.selected : ""}`}
-                  onClick={() => handleSeatSelection(seatId)}
-                  disabled={!seats[seatId]}
+                  className={`${styles.coachButton} ${selectedCoach === coach ? styles.selected : ''}`}
+                  onClick={() => handleCoachSelection(coach)}
                 >
-                  {seatId}
+                  Coach {coach}
                 </button>
               ))}
             </div>
           </div>
+
+          {selectedCoach && (
+            <div className={styles.formGroup}>
+              <label>Select a Seat:</label>
+              <div className={styles.seatSelection}>
+                {getCoachSeats(selectedCoach).map((seat) => (
+                  <button
+                    key={seat.id}
+                    type="button"
+                    className={`${styles.seatButton} ${
+                      seat.available ? styles.available : styles.unavailable
+                    } ${formData.seatId === seat.id ? styles.selected : ""}`}
+                    onClick={() => handleSeatSelection(seat.id)}
+                    disabled={!seat.available}
+                  >
+                    {seat.id}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {error && <p className={styles.error}>{error}</p>}
 
