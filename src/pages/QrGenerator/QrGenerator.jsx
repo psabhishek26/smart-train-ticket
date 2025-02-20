@@ -11,6 +11,7 @@ const QrGenerator = () => {
     destinationTo: "",
     date: "",
     seatId: "",
+    train: "",
   });
   const [seats, setSeats] = useState({});
   const [isGenerating, setIsGenerating] = useState(false);
@@ -80,9 +81,9 @@ const QrGenerator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, destinationFrom, destinationTo, date, seatId } = formData;
+    const { name, destinationFrom, destinationTo, date, seatId, train } = formData;
 
-    if (!name || !destinationFrom || !destinationTo || !date || !seatId) {
+    if (!name || !destinationFrom || !destinationTo || !date || !seatId || !train) {
       setError("Please fill in all fields and select a seat.");
       return;
     }
@@ -200,6 +201,20 @@ const QrGenerator = () => {
               onChange={handleChange}
               placeholder="Enter date"
             />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="train">Select a Train:</label>
+            <select 
+              id="train" 
+              name="train" 
+              value={formData.train}
+              onChange={handleChange}
+              className={styles.formGroup}
+            >
+              <option value="">Select a Train</option>
+              <option value="vande-bharat">Vande Bharat Express</option>
+            </select>
           </div>
 
           <div className={styles.formGroup}>

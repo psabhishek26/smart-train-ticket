@@ -39,6 +39,20 @@
   border-radius: 4px;
 }
 
+.formGroup select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.coachSelection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .seatSelection {
   display: flex;
   flex-wrap: wrap;
