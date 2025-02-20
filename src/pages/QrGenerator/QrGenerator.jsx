@@ -7,7 +7,8 @@ import { db } from "../../firebase";
 const QrGenerator = () => {
   const [formData, setFormData] = useState({
     name: "",
-    destination: "",
+    destinationFrom: "",
+    destinationTo: "",
     date: "",
     seatId: "",
   });
@@ -79,9 +80,9 @@ const QrGenerator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, destination, date, seatId } = formData;
+    const { name, destinationFrom, destinationTo, date, seatId } = formData;
 
-    if (!name || !destination || !date || !seatId) {
+    if (!name || !destinationFrom || !destinationTo || !date || !seatId) {
       setError("Please fill in all fields and select a seat.");
       return;
     }
@@ -109,7 +110,8 @@ const QrGenerator = () => {
       
       const ticketData = {
         name,
-        destination,
+        destinationFrom,
+        destinationTo,
         date,
         seatId,
         createdAt: Date.now()
@@ -122,7 +124,7 @@ const QrGenerator = () => {
 
       setQrValue(ticketId);
       setTicketDetails(ticketData);
-      setFormData({ name: "", phone: "", seatId: "" });
+      setFormData({ name: "", destinationFrom: "", destinationTo: "", date: "", seatId: "" });
     } catch (err) {
       console.error("Error generating QR code");
       setError("Failed to create the ticket.");
@@ -165,19 +167,31 @@ const QrGenerator = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="destination">Destination:</label>
+            <label htmlFor="destinationFrom">Destination from:</label>
             <input
               type="text"
-              id="destination"
-              name="destination"
-              value={formData.destination}
+              id="destinationFrom"
+              name="destinationFrom"
+              value={formData.destinationFrom}
               onChange={handleChange}
               placeholder="Enter destination"
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="destination">Date:</label>
+            <label htmlFor="destinationTo">Destination to:</label>
+            <input
+              type="text"
+              id="destinationTo"
+              name="destinationTo"
+              value={formData.destinationTo}
+              onChange={handleChange}
+              placeholder="Enter destination"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="date">Date:</label>
             <input
               type="date"
               id="date"
