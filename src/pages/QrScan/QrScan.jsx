@@ -87,6 +87,13 @@ const QrScan = () => {
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
         const data = snapshot.val();
+
+        if (data.date !== Date.now()) {
+          setError("Invalid ticket.");
+          setUserData(null);
+          return;
+        }
+
         setUserData({ ...data, ticketId });
         await stopScanner();
       } else {
