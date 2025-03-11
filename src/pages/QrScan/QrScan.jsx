@@ -88,7 +88,10 @@ const QrScan = () => {
       if (snapshot.exists()) {
         const data = snapshot.val();
 
-        if (data.date !== Date.now()) {
+        const ticketDateStr = new Date(data.date).toDateString();
+        const currentDateStr = new Date().toDateString();
+
+        if (ticketDateStr !== currentDateStr) {
           setError("Invalid ticket.");
           setUserData(null);
           return;
